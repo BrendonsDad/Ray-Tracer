@@ -20,6 +20,7 @@ set ( SOURCE_ONE_WEEKEND
   src/main.cpp
   src/color.h
   src/vec3.h
+  src/ray.h
 )
 
 include_directories(src)

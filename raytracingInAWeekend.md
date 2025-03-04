@@ -24,3 +24,24 @@ We will use the class vec3 for colors, lovations, directions, offsets, whatever.
 We use double here, but some ray tracers use float. double has greater precision and range but is twice the size compared to float. This effects memory conditions such as hardware shaders.
 
 Now using our vec3 class, lets create a new color.h header file and define a utility function that writes a single pixels color out to the standard output stream
+
+Now we can change our main to use both of these.
+
+# 4. Rays, a simple Camera, and Background
+
+### 4.1 The ray Class
+The one thing that all ray tracers have is a ray class and a computation of what color is seen along a ray. Let's think aof a ray as a function P(t) = A +tb. Here P is a 3D position along a line in 3D. A is the ray origin and b is the ray direction. 
+
+### 4.2 Sending Rays Into the Scene
+Now we are ready to make a ray tracer. At its core, a ray tracer sends rays through pixels and computes the color seen in the direction of those rays. The involved steps are.
+
+1. Calculate the ray from the "eye" through the pixel,
+2. Determine which objects the ray intersects, and
+3. Compute a coor for the closest intersection point. 
+
+Always when first developing a ray tracer, get a simple camera for getting the code up and running. We will use a 16:9 aspect ratio becuase it is so common. 
+width/height = 16/9 = 1.7778
+
+In addition to setting up the pixel dimensions for the rendered image, we also need ot set up a vitual viewport thorugh which to pass our scene rays. The viewport is a vitual rectangle in the 3D world that contains the grid of image pixel locations. If pixels are spaced the same distance horzontally as they are vertically, the viewport that bounds them will have the same aspect ratio as the rendered image. The distance between two adjacent pixels is called the pixel spaceing and square pixels is the standard. 
+
+To start things off, we'll choose an arbitrary viewport height of 2.0, and scale the viewport width to give us the desired aspect ratio. 

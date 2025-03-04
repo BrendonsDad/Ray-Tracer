@@ -15,6 +15,9 @@
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\ray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\CMakeLists.txt" />
