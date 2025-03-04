@@ -17,3 +17,10 @@ There are some things to note in this code:
 Becuase the file is written to the standard output stream, you'll need ot redirect it to an image file. Typically this is done from the command-line by using the > redirection operator.
 
 On windows, you'd get the debug build from CMake running this command.
+
+# 3. The vec3 Class
+We will use the class vec3 for colors, lovations, directions, offsets, whatever. 
+
+We use double here, but some ray tracers use float. double has greater precision and range but is twice the size compared to float. This effects memory conditions such as hardware shaders.
+
+Now using our vec3 class, lets create a new color.h header file and define a utility function that writes a single pixels color out to the standard output stream

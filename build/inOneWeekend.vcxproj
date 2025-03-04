@@ -322,6 +322,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\external\stb_image.h" />
     <ClCompile Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\main.cpp" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\color.h" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\vec3.h" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
