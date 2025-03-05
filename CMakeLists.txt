@@ -21,6 +21,9 @@ set ( SOURCE_ONE_WEEKEND
   src/color.h
   src/vec3.h
   src/ray.h
+  src/hittable.h
+  src/sphere.h
+  src/hittable_list.h
 )
 
 include_directories(src)

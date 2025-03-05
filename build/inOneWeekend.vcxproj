@@ -325,6 +325,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\color.h" />
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\vec3.h" />
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\ray.h" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\hittable.h" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\sphere.h" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\hittable_list.h" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
