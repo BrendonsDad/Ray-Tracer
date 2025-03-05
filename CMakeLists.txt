@@ -24,6 +24,8 @@ set ( SOURCE_ONE_WEEKEND
   src/hittable.h
   src/sphere.h
   src/hittable_list.h
+  src/rtweekend.h
+  
 )
 
 include_directories(src)
