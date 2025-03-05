@@ -87,3 +87,8 @@ Lets revisit the ray-sphere function.
 Now, how about more than one sphere? While it is tempting to have an array of spheres, a very clean solution is to make an abstract class for anything a ray might hit, and make both a sphere and a list of psheres just something that can be hit. What theat class should be calledis something of a quandary calling it an object would be good if not for the object orieted programming. Surfae is often useed with the weakneass being maybe we want volumes (fog, cloujds) hittable emphasizes that member function that unites them. I dont love any of these but well go with hittable
 
 This hittable abstract class will have a hit function that takes in a ray. 
+
+
+### 6.4 Front Facees Versus Back Faces
+
+We can have the normal always point against the ray. If the ray is outised the sphere the normal will point outward, if it is inside the sphere the normal will point inward.
