@@ -45,3 +45,45 @@ width/height = 16/9 = 1.7778
 In addition to setting up the pixel dimensions for the rendered image, we also need ot set up a vitual viewport thorugh which to pass our scene rays. The viewport is a vitual rectangle in the 3D world that contains the grid of image pixel locations. If pixels are spaced the same distance horzontally as they are vertically, the viewport that bounds them will have the same aspect ratio as the rendered image. The distance between two adjacent pixels is called the pixel spaceing and square pixels is the standard. 
 
 To start things off, we'll choose an arbitrary viewport height of 2.0, and scale the viewport width to give us the desired aspect ratio. 
+
+# 5. Adding a Sphere
+Let's add a single object to our ray tracer. People often use spheres in ray tracers becuase calculating whether a ray hits a sphere is relatively simple. 
+
+###  5.1 Ray-Sphere intersection 
+equation of a sphere is 
+x^2 + y^2 + z^2 = r^2
+If a given point  is inside the sphere, then x^2 + y^2 + z^2 < r^2
+If a given point  is outside the sphere, then x^2 + y^2 + z^2 > r^2
+
+Using the dot product we can rewrite the equation of the sphere in vector form as (C - P) * ( C - P ) = r^2
+
+We can read this as "any point P that satisfies this equation is on the sphere" We want to know if our ray P(t) = Q td ever hits the sphere anywhere. If it does hit the sphere, there is some t for which P(t) satisfies the sphere equation. So we are looking for any t where this is true: 
+
+(C - P(t)) * (C - P(t)) = r^2
+
+
+0 roots, misses sphere
+1 root, on surface of sphere
+2 roots, goes in and out of sphere
+
+### 5.2 Creating our first RayTraced Image
+This lacks all sorts of things - like shading, reflection rays, and more than one object - but we are closer to halfway done than we are to our start! One thing to be aware of is that we are testing to see if a ray intersects with the sphere by solving the quadratic equation and seeing if a solution exists but solutions with negative values of t work just fine. 
+
+
+# 6. Surface Normals and Multiple Objects
+
+### 6.1 Shading with Surface Normals
+First, let's get ourselves a surface normal so we can shade. This is a vector that is perpendicular to the surface at the point of intersection. 
+
+We have a key design decision to make for normal vectorsin our code: whether normal vectors will have an arbitrary length or will be normalized to unit length
+
+It is tempting to skip the expensive the expensive square root operation involved in normalizing the vector, in case it's not needed. In practice, however, there are three important observations. First if a unit length normal vector is ever required, then you might as well do it up front once, instead of over and over agiain "just in case" for every location where unit lenght is requred. Second, we do require unit length normal vectors in several places, third if you require normal vectors to be unit length then you can often efficiently generate that vector with an understanding of the specific geometry class, in its constructor, or in the hit() function. 
+
+### 6.2 Simplifying the Ray-Sphere Intersection Code
+
+Lets revisit the ray-sphere function.
+
+### 6.3 An Abstraction for Hittable Objects
+Now, how about more than one sphere? While it is tempting to have an array of spheres, a very clean solution is to make an abstract class for anything a ray might hit, and make both a sphere and a list of psheres just something that can be hit. What theat class should be calledis something of a quandary calling it an object would be good if not for the object orieted programming. Surfae is often useed with the weakneass being maybe we want volumes (fog, cloujds) hittable emphasizes that member function that unites them. I dont love any of these but well go with hittable
+
+This hittable abstract class will have a hit function that takes in a ray. 
