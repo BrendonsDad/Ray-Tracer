@@ -25,7 +25,10 @@ set ( SOURCE_ONE_WEEKEND
   src/sphere.h
   src/hittable_list.h
   src/rtweekend.h
-  
+  src/interval.h
+  src/camera.h
+  src/lightCol.h
+
 )
 
 include_directories(src)

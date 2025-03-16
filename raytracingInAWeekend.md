@@ -92,3 +92,21 @@ This hittable abstract class will have a hit function that takes in a ray.
 ### 6.4 Front Facees Versus Back Faces
 
 We can have the normal always point against the ray. If the ray is outised the sphere the normal will point outward, if it is inside the sphere the normal will point inward.
+
+### 6.6 Some new C++ features
+Hittbale uses vector shared_ptr and makeshared
+
+shared_ptr<type> is a pointer to some allocated type, with reference counting semantics. Every time you assign its value to another shared pointer the reference count is incremented. 
+
+since the type can be automattically deduced by the return type of make_shared<type>(...), the above lines can be more simply expressed using C++'s auto type specifier. 
+
+### 6.7 Common Constants and Utility Functions
+We need some math constants that we conventionally define in their own header file. 
+
+### 6.8 An Interval Class
+Before we continue, well implement an interval class to manage real valued intervals with a min and max. Well end up using this class quite often.
+
+# 7 Moving Camera Code into its own Class
+We will make the camera class, which will 
+1. Construct and dipsatch rays into the worlds
+2. Use the results of these rays to contruct the rendered image. 

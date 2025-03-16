@@ -1,94 +1,95 @@
-#include "color.h"
-#include "ray.h"
-#include "vec3.h"
+#include "rtweekend.h"
 
-#include <iostream>
-
-double hit_sphere(const point3& center, double radius, const ray& r) {
-    vec3 oc = center - r.origin();
-
+#include "camera.h"
+#include "hittable.h"
+#include "hittable_list.h"
+#include "sphere.h"
+#include "lightCol.h"
 
 
-    // auto a = dot(r.direction(), r.direction());
-    // auto b = -2.0 * dot(r.direction(), oc);
-    // auto c = dot(oc, oc) - radius*radius;
-    // auto discriminant = b*b - 4*a*c;
-
-    auto a = r.direction().length_squared();
-    auto h = dot(r.direction(), oc);
-    auto c = oc.length_squared() - radius*radius;
-    auto discriminant = h*h -a*c;
-
-
-
-    if (discriminant < 0) {
-        return -1.0;
-    } else {
-        return (h - std::sqrt(discriminant) ) / a;
-    }
-}
-
-
-color ray_color(const ray& r) {
-    auto t = hit_sphere(point3(0,0,-1), 0.5, r);
-
-    if (t > 0.0) {
-        vec3 N = unit_vector(r.at(t) - vec3(0,0,-1));
-        return 0.5*color(N.x()+1, N.y()+1, N.z()+1);
-    }
-
-    vec3 unit_direction = unit_vector(r.direction());
-    auto a = 0.5*(unit_direction.y() + 1.0);
-    return (1.0-a)*color(1.0, 1.0, 1.0) + a*color(0.5, 0.7, 1.0);
-}
 
 int main() {
 
-    // Image
+    // World
+    hittable_list world;
 
-    auto aspect_ratio = 9.0 / 9.0;
-    int image_width = 400;
-
-    // Calculate the image height and ensure that its at least 1.
-    int image_height = int(image_width / aspect_ratio);
-    image_height = (image_height < 1) ? 1 : image_height;
-
-    // Camera
-    auto focal_length = 1.0;
-    auto viewport_height = 2.0;
-    auto viewport_width = viewport_height * (double(image_width)/image_height);
-    auto camera_center = point3(0, 0, 0);
+    // Now I need to 
+    // 1. The ability to ray trace polygons
+    // 2. The ability to handle a single shadow ray per intersection
+    // 3. The ability to trace reflection rays at intersections.
 
 
-    // Calculate the vectors across the horizontal and down the vertical viewport edges.
-    auto viewport_u = vec3(viewport_width, 0, 0);
-    auto viewport_v = vec3(0, -viewport_height, 0);
+    //world.add(make_shared<sphere>(point3(0,0,-1), 0.5, vec3(1,0,1)));
+    //world.add(make_shared<sphere>(point3(0,-100.5,-1), 100));
 
-    // Calculate the horizontal and vertical delta vectors from pixel to pixel. 
-    auto pixel_delta_u = viewport_u / image_width;
-    auto pixel_delta_v = viewport_v / image_height;
-
-    // Calculate the location of the upper left pixel to pixel.
-    auto viewport_upper_left = camera_center
-                             - vec3(0, 0, focal_length) - viewport_u/2 - viewport_v/2;
-    auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    //purple Sphere
+    //auto purpleLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0);
 
 
-    // Render
+    // //white sphere
+    // auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0);
+    // world.add(make_shared<sphere>(point3(0.45, 0.0, -0.15), 0.15, whiteLight));
 
-    std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+    // // red sphere
+    // auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0);
+    // world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
 
-    for (int j = 0; j < image_height; j++) {
-        std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
-        for (int i = 0; i < image_width; i++) {
-            auto pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v);
-            auto ray_direction = pixel_center - camera_center;
-            ray r(camera_center, ray_direction);
+    // // red sphere
+    // auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0);
+    // world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
 
-            color pixel_color = ray_color(r);
-            write_color(std::cout, pixel_color);
-        }
-    }
+    // // blue sphere
+    // auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0);
+    // world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
 
-    std::clog << "\rDone.                   \n";
+    //Sun
+    auto sunLight = lightCol(1, 0, 0, vec3(1, 0.7, 0), vec3(0, 0, 0), 1.0, 1.0);
+    world.add(make_shared<sphere>(point3(-75, 17, 0.0), 80, sunLight));
+
+    //Mercury
+    auto mercLight = lightCol(0.8, 0.1, 0.3, vec3(.9, .20, .20), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(0.0, 0.0, 0.0), 0.03, mercLight));
+
+    //Venus
+    auto venLight = lightCol(0.8, 0.1, 0.3, vec3(.63, .52, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(0.2, 0.0, 0.0), 0.06, venLight));
+
+    //Earth
+    auto earthLight = lightCol(0.8, 0.1, 0.3, vec3(.25, .42, .88), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(0.4, 0.0, 0.0), 0.063, earthLight));
+
+    //Moon
+    auto moonLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(0.49, 0.055, 0.0), 0.021, moonLight));
+
+    //Mars
+    auto marsLight = lightCol(0.8, 0.1, 0.3, vec3(.75, .25, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(0.65, 0.0, 0.0), 0.055, marsLight));
+
+    //Jupiter
+    auto jupiterLight = lightCol(0.8, 0.1, 0.3, vec3(.97, .86, .71), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    world.add(make_shared<sphere>(point3(1.2, 0.0, 0.0), 0.3, jupiterLight));
+
+    // // red sphere
+    // auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0);
+    // world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
+
+    // // red sphere6
+    // auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0);
+    // world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
+
+    // // blue sphere
+    // auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0);
+    // world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
+
+
+
+    
+
+    camera cam;
+
+    cam.aspect_ratio = 1.77;
+    cam.image_width = 1000;
+
+    cam.render(world);
 }

@@ -27,6 +27,18 @@
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\hittable_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\rtweekend.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\interval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\lightCol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\CMakeLists.txt" />
