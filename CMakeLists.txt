@@ -28,6 +28,7 @@ set ( SOURCE_ONE_WEEKEND
   src/interval.h
   src/camera.h
   src/lightCol.h
+  src/triangle.h
 
 )
 

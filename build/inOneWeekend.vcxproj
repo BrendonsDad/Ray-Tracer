@@ -332,6 +332,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\interval.h" />
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\camera.h" />
     <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\lightCol.h" />
+    <ClInclude Include="C:\Users\aubur\Desktop\cs455\Ray-Tracer\src\triangle.h" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

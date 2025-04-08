@@ -443,3 +443,83 @@ Step 3:
                 if ucross > 0 the edge crosses +u so increment numCrossings
         c. set signHolder = nextSignHolder
     8. If numCrossings is odd, the point is inside the polygon.
+
+
+
+# Curve and Surface Types
+* f(x, y) = 0
+* plug in an (x, y) point
+    * if f = 0, the point is on the surface
+    * if f < 0, the point is inside the object
+    * if f > 0, the point is outside the object
+* easy to determine if a specific point is on the sufface
+* difficult to find all suface points
+
+## Many objects can be represented as implicit Surfaces
+* Sphere
+* plane (with normal n and distance to origin d): fplane(p) = p*n + D = 0
+
+* to determine where a ray intersects an object:
+    * Need to find the intersection point p of the ray and the object
+    * The ray is represented explicityly in parametric form:
+        r(t) = r0 +rdt
+    * Plug the ray equation into the surface equation and solve for t:
+        f(r(t)) = 0
+    * Substitute t back into ray equation to find intersection point p:
+        p = r(t) = ro +rdt
+
+Remember a ray can be represented as a origin and a direction  (point and vector)
+The ray consists of all points
+r(t) = ro + rdt
+
+# What about arbitrary polygons?
+* assume planar polygons
+* first preform the ray/plane intersection with the plane in which the pllygon lies
+* Next, determine whether the intersection point lies within the polygon
+* How do we quickly tell whetehrh the point lies within the polygon?
+## Idea
+* Shoot a ray form the intersection point in an arbitray direction
+    * if the ray crosses an even number of polygon edges, the point is outside the polygon
+    * if the ray crosses an odd number of polygon edges the point is indide the polygon
+
+### Polygon:
+polygon: a plane figure with at least three straight sides and angles, and typically five or more
+* Polygon: 
+    * a set of N points Gn = (xn, yn, zn), n = 0, 1, ... N -1
+* Plane:
+    * Ax + By + Cz + D = 9, with normal Pn = (A, B, C)
+
+
+Step 1:
+* Project the polygon onto a 2D plane
+    * one of the coordinate planes
+    * simply discard one of the coordinates
+    This will project the polygon onto the plane defined by the other two coordinates
+    * Topology preserving but not area preserving
+    * throw away the coordinate whos maginitude in the plane is normal is greatest
+    *example  if pn = (3, -1, -5) throw away z coordinates
+
+Step 2:
+*   Translate the polygon so that the intersection point is at the origin
+    - apply this translation to all points in the polygon
+
+Step 3:
+* Send a ray down one of the coordinate axes and count the number of intersections of that ray with the polygon
+    - This is done in practice by looking at each polygon edge one at a time to see if it crosses the coordinate axis
+
+The Actual Algorithm - Part 1
+1. Determine the dominate coordinate as teh largest magnitude component of Pn
+2. For each vertex (xn, yn, zn), n = 0, 1, ..., N - 1 of the polygon, project the vertex onto the dominant coordinate axis, giveing (un, and vn) vertices
+3. project the intersection point (xint, yint, zint) onto the same coordinate plane as the vertices. 
+4. Translate all polygon vertices by (-uint, -vint), giving(un', vn') vertices
+5. Set numCrossings = 0
+6. If v0' < 0, set signHolder = -1, otherwise set signHolder = 1
+7. For i = 0 to N-1 (note -when i = N-1, i+1 should be 0)
+    a. if vi+1' < 0, set nextSignHolder = -1 else set nextSignHolder = 1
+    b. if (signHolder <> nextSignHolder)
+        i. if(ui' > 0 and ui+1' > 0) this edge crosses+u' so invrement numCrossings
+        ii. else if (ui' > 0 or ui+1' > 0) the edge might cross +u', so compute the intersection with the u' axis
+            ucross = ui' -vi' * (ui+1' -ui)/(vi+1' -vi')
+            if ucross > 0 the edge crosses +u so increment numcrossings
+    c. set signHolder = nextSignHolder
+8. If numCrossings is odd, the pint is inside the polygon

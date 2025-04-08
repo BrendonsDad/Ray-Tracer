@@ -87,6 +87,7 @@ class camera {
                     L = vec3(-1.0, 0.50, .250);
                 }
 
+                L = unit_vector(L);
                 double kd = rec.Kd;
                 double ks = rec.Ks;
                 double ka = rec.Ka;
@@ -107,7 +108,8 @@ class camera {
 
 
                 //Last one is specular, we need to define what r is and we need to define what V is. 
-                auto R = unit_vector(2*(dot(L, unit_vector(rec.normal)))*(rec.normal-L));
+                //auto R = unit_vector(2*(dot(L, unit_vector(rec.normal)))*(rec.normal-L));
+                auto R = 2 * rec.normal * dot(rec.normal, L) - L;
                 auto V = -1*unit_vector(r.direction());
                 //V = unit_vector(V);
                 double VRDot = dot(V, R);

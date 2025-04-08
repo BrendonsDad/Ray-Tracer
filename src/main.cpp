@@ -4,6 +4,7 @@
 #include "hittable.h"
 #include "hittable_list.h"
 #include "sphere.h"
+#include "triangle.h"
 #include "lightCol.h"
 
 
@@ -25,50 +26,52 @@ int main() {
     //purple Sphere
     //auto purpleLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0);
 
+    auto triLight = lightCol(0.9, 1.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
 
-    // //white sphere
-    // auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0);
-    // world.add(make_shared<sphere>(point3(0.45, 0.0, -0.15), 0.15, whiteLight));
 
-    // // red sphere
-    // auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0);
-    // world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
+    //white sphere
+    auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    world.add(make_shared<sphere>(point3(0.45, 0.0, -0.15), 0.15, whiteLight));
 
-    // // red sphere
-    // auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0);
-    // world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
+    // red sphere
+    auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0, 1);
+    world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
 
-    // // blue sphere
-    // auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0);
-    // world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
+    // red sphere
+    auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0, 1);
+    world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
 
-    //Sun
-    auto sunLight = lightCol(1, 0, 0, vec3(1, 0.7, 0), vec3(0, 0, 0), 1.0, 1.0);
-    world.add(make_shared<sphere>(point3(-75, 17, 0.0), 80, sunLight));
+    // blue sphere
+    auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0, 1);
+    world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
 
-    //Mercury
-    auto mercLight = lightCol(0.8, 0.1, 0.3, vec3(.9, .20, .20), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(0.0, 0.0, 0.0), 0.03, mercLight));
+    // //Sun
+    // auto sunLight = lightCol(1, 0, 0, vec3(1, 0.7, 0), vec3(0, 0, 0), 1.0, 1.0);
+    // world.add(make_shared<sphere>(point3(-75, 17, 0.0), 80, sunLight));
 
-    //Venus
-    auto venLight = lightCol(0.8, 0.1, 0.3, vec3(.63, .52, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(0.2, 0.0, 0.0), 0.06, venLight));
+    // //Mercury
+    // auto mercLight = lightCol(0.8, 0.1, 0.3, vec3(.9, .20, .20), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(0.0, 0.0, 0.0), 0.03, mercLight));
 
-    //Earth
-    auto earthLight = lightCol(0.8, 0.1, 0.3, vec3(.25, .42, .88), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(0.4, 0.0, 0.0), 0.063, earthLight));
+    // //Venus
+    // auto venLight = lightCol(0.8, 0.1, 0.3, vec3(.63, .52, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(0.2, 0.0, 0.0), 0.06, venLight));
 
-    //Moon
-    auto moonLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(0.49, 0.055, 0.0), 0.021, moonLight));
+    // //Earth
+    // auto earthLight = lightCol(0.8, 0.1, 0.3, vec3(.25, .42, .88), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(0.4, 0.0, 0.0), 0.063, earthLight));
 
-    //Mars
-    auto marsLight = lightCol(0.8, 0.1, 0.3, vec3(.75, .25, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(0.65, 0.0, 0.0), 0.055, marsLight));
+    // //Moon
+    // auto moonLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(0.49, 0.055, 0.0), 0.021, moonLight));
 
-    //Jupiter
-    auto jupiterLight = lightCol(0.8, 0.1, 0.3, vec3(.97, .86, .71), vec3(1.0, 1.0, 1.0), 4.0, 0);
-    world.add(make_shared<sphere>(point3(1.2, 0.0, 0.0), 0.3, jupiterLight));
+    // //Mars
+    // auto marsLight = lightCol(0.8, 0.1, 0.3, vec3(.75, .25, .07), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(0.65, 0.0, 0.0), 0.055, marsLight));
+
+    // //Jupiter
+    // auto jupiterLight = lightCol(0.8, 0.1, 0.3, vec3(.97, .86, .71), vec3(1.0, 1.0, 1.0), 4.0, 0);
+    // world.add(make_shared<sphere>(point3(1.2, 0.0, 0.0), 0.3, jupiterLight));
 
     // // red sphere
     // auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0);
@@ -81,6 +84,8 @@ int main() {
     // // blue sphere
     // auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0);
     // world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
+
+
 
 
 
