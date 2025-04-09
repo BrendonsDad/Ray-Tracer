@@ -26,24 +26,41 @@ int main() {
     //purple Sphere
     //auto purpleLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0);
 
+
+
+
+
     auto triLight = lightCol(0.9, 1.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    //tri test
+    world.add(make_shared<triangle>(point3(0.0, -0.7, -0.5), point3(1.0, 0.4, -1.0), point3(0.0, -0.7, -1.5), triLight));
 
 
-    //white sphere
-    auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
-    world.add(make_shared<sphere>(point3(0.45, 0.0, -0.15), 0.15, whiteLight));
 
-    // red sphere
-    auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0, 1);
-    world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
 
-    // red sphere
-    auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0, 1);
-    world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
 
-    // blue sphere
-    auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0, 1);
-    world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
+
+
+
+    // //white sphere
+    // auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    // world.add(make_shared<sphere>(point3(0.45, 0.0, -0.15), 0.15, whiteLight));
+
+    // // red sphere
+    // auto redLight = lightCol(0.6, 0.3, 0.1, vec3(1.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), 32.0, 1);
+    // world.add(make_shared<sphere>(point3(0.0, 0.0, -0.1), 0.2, redLight));
+
+    // // red sphere
+    // auto greenLight = lightCol(0.7, 0.2, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0, 1);
+    // world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
+
+    // // blue sphere
+    // auto blueLight = lightCol(0.9, 0.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 16.0, 1);
+    // world.add(make_shared<sphere>(point3(0.0, -10000.5, 0.0), 10000.0, blueLight));
+
+
+
+
+
 
     // //Sun
     // auto sunLight = lightCol(1, 0, 0, vec3(1, 0.7, 0), vec3(0, 0, 0), 1.0, 1.0);

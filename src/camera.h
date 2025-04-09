@@ -77,6 +77,13 @@ class camera {
                 // IF A HIT, DO AUBURYS LIGHT CODE                                           //
                 /////---------------------------------------------------------------------/////
 
+
+                //Shadows//
+                //  - make a new ray whos origin is the point on the face and whos direction is light direction times -1
+                //  - send out and check for intersections against all objects
+                //  - in the ray that you return 
+
+
                 // light color
                 auto lightColor = vec3(1.0, 1.0, 1.0);
                 // Ambient light
@@ -94,7 +101,8 @@ class camera {
                 auto Od = rec.Od; 
                 auto Os = rec.Os;
                 double Kgls = rec.Kgls;
-
+                
+                //ambient is your shadow color
                 auto ambient = ka*lightColor*Od;
                 auto nldot = dot(unit_vector(rec.normal), L);
                 double dotmax;
