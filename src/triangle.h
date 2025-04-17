@@ -67,6 +67,7 @@ class triangle : public hittable {
             rec.Os = lc.Os;
             rec.Kgls = lc.Kgls;
             rec.sun = lc.sun;
+            rec.refl = lc.refl;
 
             return true;
 

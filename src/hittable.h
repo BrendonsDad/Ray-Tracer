@@ -9,7 +9,7 @@ class hit_record {
         vec3 normal;
         vec3 Od;
         vec3 Os;
-        double t, Kd, Ks, Ka, Kgls, sun;
+        double t, Kd, Ks, Ka, Kgls, sun, refl;
         bool front_face;
 
         void set_face_normal(const ray& r, const vec3& outward_normal) {

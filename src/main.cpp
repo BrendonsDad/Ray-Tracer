@@ -55,27 +55,27 @@ int main() {
 
     ///////////////////////////////////////////////////RAY2SECONDIMAGE///////////////////////////////////////////////////////////////////////
     //white sphere
-    auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    auto whiteLight = lightCol(0.8, 0.1, 0.3, vec3(1.0, 1.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1, 0.0);
     world.add(make_shared<sphere>(point3(0.5, 0.0, -0.15), 0.05, whiteLight));
 
     // red sphere
-    auto redLight = lightCol(0.8, 0.8, 0.1, vec3(1.0, 0.0, 0.0), vec3(0.5, 1.0, 0.5), 32.0, 1);
+    auto redLight = lightCol(0.8, 0.8, 0.1, vec3(1.0, 0.0, 0.0), vec3(0.5, 1.0, 0.5), 32.0, 1, 0.0);
     world.add(make_shared<sphere>(point3(0.3, 0.0, -0.1), 0.08, redLight));
 
     // green sphere
-    auto greenLight = lightCol(0.7, 0.5, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0, 1);
+    auto greenLight = lightCol(0.7, 0.5, 0.1, vec3(0.0, 1.0, 0.0), vec3(0.5, 1.0, 0.5), 64.0, 1, 0.0);
     world.add(make_shared<sphere>(point3(-0.6, 0.0, 0.0), 0.3, greenLight));
 
     // reflect sphere
-    auto reflectLight = lightCol(0.0, 0.1, 0.1, vec3(0.75, 0.75, 0.75), vec3(1.0, 1.0, 1.0), 10.0, 1);
+    auto reflectLight = lightCol(0.0, 0.1, 0.1, vec3(0.75, 0.75, 0.75), vec3(1.0, 1.0, 1.0), 10.0, 1, 0.9);
     world.add(make_shared<sphere>(point3(0.1, -0.55, 0.25), 0.3, reflectLight));
 
 
-    auto blueTri = lightCol(0.9, 0.9, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 32.0, 1);
+    auto blueTri = lightCol(0.9, 0.9, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 32.0, 1, 0.0);
     //tri test
     world.add(make_shared<triangle>(point3(0.3, -0.3, -0.4), point3(0.0, 0.3, -1.0), point3(-0.3, -0.3, 0.2), blueTri));
 
-    auto yellowTri = lightCol(0.9, 0.5, 0.1, vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    auto yellowTri = lightCol(0.9, 0.5, 0.1, vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0), 4.0, 1, 0.0);
     //tri test
     world.add(make_shared<triangle>(point3(-0.2, 0.1, 0.1), point3(-0.2, -0.5, 0.2), point3(-0.2, 0.1, -0.3), yellowTri));
 

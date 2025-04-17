@@ -37,6 +37,7 @@ class sphere : public hittable {
             rec.Ks = lc.Ks;
             rec.Kgls = lc.Kgls;
             rec.sun = lc.sun;
+            rec.refl = lc.refl;
 
             rec.p = r.at(rec.t);
             vec3 outward_normal = (rec.p - center) / radius;
