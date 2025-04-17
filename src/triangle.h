@@ -5,7 +5,7 @@
 #include "lightCol.h"
 #include "interval.h"
 #include "ray.h"
-
+#include <cmath>
 
 class triangle : public hittable {
     public:

@@ -89,7 +89,7 @@ class camera {
                 // Ambient light
                 auto ambientl =  vec3(0.1, 0.1, 0.1);
                 // Direction to light
-                auto L = vec3(1.0, 1.0, 1.0);
+                auto L = vec3(1.0, 0.0, 0.0);
                 if (rec.sun != 1.0) {
                     L = vec3(-1.0, 0.50, .250);
                 }
