@@ -107,14 +107,18 @@ class camera {
 
                 // Shadow ray origin: slightlly offset to avoid self-intersection
                 auto shadow_origin = rec.p + 0.001 * rec.normal;
-                ray shadow_ray(shadow_origin, -L);
+                ray shadow_ray(shadow_origin, L);
 
                 // Check for shadow
-                if (world.hit(shadow_ray, interval(0.001, infinity), rec)) {
+                if (rec.refl < 0.01) {
+                    if (world.hit(shadow_ray, interval(0.001, infinity), rec)) {
                     
-                    // In shadow: only ambient light
-                    return ambient;
+                        // In shadow: only ambient light
+                        return ambient;
+                    }
+
                 }
+                
 
                 
 
@@ -157,14 +161,14 @@ class camera {
                 auto finalcolor = ambient + diffuse + specular;
 
 
-                // if (rec.refl > 0) {
-                //     auto reflection_dir = reflect(unit_vector(r.direction()), rec.normal);
-                //     ray reflection_ray(rec.p + 0.001 * rec.normal, reflection_dir);
-                //     color reflection_color = ray_color(reflection_ray, world); // recursive call
+                if (rec.refl > 0) {
+                    auto reflection_dir = reflect(unit_vector(r.direction()), rec.normal);
+                    ray reflection_ray(rec.p + 0.001 * rec.normal, reflection_dir);
+                    color reflection_color = ray_color(reflection_ray, world); // recursive call
 
-                //     // Mix original color with reflection based on reflectivity (rec.refl from 0 to 1)
-                //     finalcolor = (1.0 - rec.refl) * finalcolor + rec.refl * reflection_color;
-                // }
+                    // Mix original color with reflection based on reflectivity (rec.refl from 0 to 1)
+                    finalcolor = (1.0 - rec.refl) * finalcolor + rec.refl * reflection_color;
+                }
 
 
                 // auto purple = vec3(1, 0, 1);

@@ -32,17 +32,17 @@ int main() {
 
     // ////////////////////////////////////////////////////RAY2FIRSTIMAGE///////////////////////////////////////////////////////////////////////
 
-    // auto triLight = lightCol(0.9, 1.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    // auto triLight = lightCol(0.9, 1.0, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 4.0, 1, 0.0);
     // //tri test
     // world.add(make_shared<triangle>(point3(0.0, -0.7, -0.5), point3(1.0, 0.4, -1.0), point3(0.0, -0.7, -1.5), triLight));
 
-    // auto triLight2 = lightCol(0.9, 1.0, 0.1, vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0), 4.0, 1);
+    // auto triLight2 = lightCol(0.9, 1.0, 0.1, vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0), 4.0, 1, 0.0);
     // //tri test
     // world.add(make_shared<triangle>(point3(0.0, -0.7, -0.5), point3(0.0, -0.7, -1.5), point3(-1.0, 0.4, -1.0), triLight2));
 
 
     // // FIRST IMAGE SPHERE
-    // auto firstLight = lightCol(0.0, 0.1, 0.1, vec3(.75, .75, .75), vec3(1.0, 1.0, 1.0), 10.0, 1);
+    // auto firstLight = lightCol(0.0, 0.1, 0.1, vec3(.75, .75, .75), vec3(1.0, 1.0, 1.0), 10.0, 1, 0.9);
     // world.add(make_shared<sphere>(point3(0.0, 0.3, -1.0), 0.25, firstLight));
 
 
@@ -73,7 +73,7 @@ int main() {
 
     auto blueTri = lightCol(0.9, 0.9, 0.1, vec3(0.0, 0.0, 1.0), vec3(1.0, 1.0, 1.0), 32.0, 1, 0.0);
     //tri test
-    world.add(make_shared<triangle>(point3(0.3, -0.3, -0.4), point3(0.0, 0.3, -1.0), point3(-0.3, -0.3, 0.2), blueTri));
+    world.add(make_shared<triangle>(point3(0.3, -0.3, -0.4), point3(0.0, 0.3, -0.1), point3(-0.3, -0.3, 0.2), blueTri));
 
     auto yellowTri = lightCol(0.9, 0.5, 0.1, vec3(1.0, 1.0, 0.0), vec3(1.0, 1.0, 1.0), 4.0, 1, 0.0);
     //tri test
