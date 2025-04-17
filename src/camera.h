@@ -104,6 +104,11 @@ class camera {
                 
                 //ambient is your shadow color
                 auto ambient = ka*lightColor*Od;
+
+                
+
+
+
                 auto nldot = dot(unit_vector(rec.normal), L);
                 double dotmax;
                 if (nldot < 0) {
